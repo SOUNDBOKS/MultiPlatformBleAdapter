@@ -42,7 +42,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "com.github.SOUNDBOKS:RxAndroidBle:d68d955"
+    implementation "com.github.SOUNDBOKS:RxAndroidBle:d68d9558e400079c91787ab0d423d2d1112c7c0a"
     testImplementation 'junit:junit:4.12'
 }
 
