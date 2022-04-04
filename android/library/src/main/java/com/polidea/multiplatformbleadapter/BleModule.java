@@ -51,11 +51,14 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Completable;
 import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.Single;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import java.util.concurrent.Callable;
+import java.util.concurrent.TimeoutException;
+
 import io.reactivex.functions.Function;
 import io.reactivex.functions.Predicate;
 import io.reactivex.internal.observers.CallbackCompletableObserver;
@@ -1363,10 +1366,18 @@ public class BleModule implements BleAdapter {
         }
 
         if (timeout != null) {
-            connect = connect.timeout(timeout, TimeUnit.MILLISECONDS, Observable.<RxBleConnection>never());
+            connect = connect.timeout(
+                    Observable.empty().delay(timeout, TimeUnit.MILLISECONDS),
+                    new Function<RxBleConnection, ObservableSource<RxBleConnection>>() {
+                        @Override
+                        public ObservableSource<RxBleConnection> apply(final RxBleConnection rxBleConnection) throws Exception {
+                            return Observable.never();
+                        }
+                    }
+            );
         }
 
-        DisposableObserver<RxBleConnection> observer = new DisposableObserver<RxBleConnection>() {
+        final DisposableObserver<RxBleConnection> observer = new DisposableObserver<RxBleConnection>() {
             @Override
             public void onComplete() {
             }
