@@ -38,13 +38,6 @@ class RxCBCharacteristic: RxCharacteristicType {
         self.characteristic = characteristic
     }
 
-    init?(characteristic: CBCharacteristic?) {
-        guard let characteristic = characteristic else {
-            return nil
-        }
-        self.characteristic = characteristic
-    }
-
     var objectId: UInt {
         return UInt(bitPattern: ObjectIdentifier(characteristic))
     }
