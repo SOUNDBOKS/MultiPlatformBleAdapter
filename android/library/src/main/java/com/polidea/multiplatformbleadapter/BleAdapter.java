@@ -63,6 +63,10 @@ public interface BleAdapter {
             OnSuccessCallback<Device[]> onSuccessCallback,
             OnErrorCallback onErrorCallback);
 
+    void getBondedDevices(
+            OnSuccessCallback<Device[]> onSuccessCallback,
+            OnErrorCallback onErrorCallback);
+
     void connectToDevice(
             String deviceIdentifier,
             ConnectionOptions connectionOptions,

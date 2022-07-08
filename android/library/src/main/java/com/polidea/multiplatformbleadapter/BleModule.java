@@ -389,6 +389,25 @@ public class BleModule implements BleAdapter {
     }
 
     @Override
+    public void getBondedDevices(OnSuccessCallback<Device[]> onSuccessCallback,
+                                 OnErrorCallback onErrorCallback) {
+        if (rxBleClient == null) {
+            onErrorCallback.onError(new BleError(BleErrorCode.BluetoothManagerDestroyed, "BleManager not created when tried to get connected devices", null));
+            return;
+        }
+
+        List<Device> localBondedDevices = new ArrayList<>();
+        Set<RxBleDevice> bleDevices = rxBleClient.getBondedDevices();
+
+        for (RxBleDevice bleDevice : bleDevices) {
+            Device device = rxBleDeviceToDeviceMapper.map(bleDevice);
+            localBondedDevices.add(device);
+        }
+
+        onSuccessCallback.onSuccess(localBondedDevices.toArray(new Device[0]));
+    }
+
+    @Override
     public void getConnectedDevices(String[] serviceUUIDs,
                                     OnSuccessCallback<Device[]> onSuccessCallback,
                                     OnErrorCallback onErrorCallback) {
