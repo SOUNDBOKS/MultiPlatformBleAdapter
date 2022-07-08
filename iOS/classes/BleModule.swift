@@ -361,6 +361,13 @@ public class BleClientManager : NSObject {
             }
         );
     }
+    
+    @objc
+    public func bondedDevices(resolve: @escaping Resolve,
+                              reject: @escaping Reject) {
+        // TODO: No way of checking this on iOS. Return empty array
+        resolve([]);
+    }
 
     // Mark: Connection management -------------------------------------------------------------------------------------
 
