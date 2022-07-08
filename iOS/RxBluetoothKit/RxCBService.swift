@@ -37,6 +37,13 @@ class RxCBService: RxServiceType {
         self.service = service
     }
 
+    init?(service: CBService?) {
+        guard let service = service else {
+            return nil
+        }
+        self.service = service
+    }
+
     var objectId: UInt {
         return UInt(bitPattern: ObjectIdentifier(service))
     }
