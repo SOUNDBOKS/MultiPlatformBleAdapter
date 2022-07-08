@@ -39,8 +39,8 @@ class RxCBDescriptor: RxDescriptorType {
         return descriptor.uuid
     }
 
-    var characteristic: RxCharacteristicType {
-        return RxCBCharacteristic(characteristic: descriptor.characteristic!)
+    var characteristic: RxCharacteristicType? {
+        return RxCBCharacteristic(characteristic: descriptor.characteristic)
     }
 
     var value: Any? {

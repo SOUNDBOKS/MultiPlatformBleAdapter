@@ -29,6 +29,20 @@ class RxCBService: RxServiceType {
     init(service: CBService) {
         self.service = service
     }
+    
+    init?(service: CBService?) {
+        guard let service = service else {
+            return nil
+        }
+        self.service = service
+    }
+
+    init?(service: CBService?) {
+        guard let service = service else {
+            return nil
+        }
+        self.service = service
+    }
 
     var objectId: UInt {
         return UInt(bitPattern: ObjectIdentifier(service))
@@ -39,11 +53,11 @@ class RxCBService: RxServiceType {
     }
 
     var characteristics: [RxCharacteristicType]? {
-        return service.characteristics?.map(RxCBCharacteristic.init)
+        return service.characteristics?.compactMap(RxCBCharacteristic.init)
     }
 
     var includedServices: [RxServiceType]? {
-        return service.includedServices?.map(RxCBService.init)
+        return service.includedServices?.compactMap(RxCBService.init)
     }
 
     var isPrimary: Bool {
