@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = "SBMultiplatformBleAdapter"
-  spec.version      = "1.0.0-beta"
+  spec.version      = "1.0.2-beta"
   spec.summary      = "An adapter for RxBluetoothKit that exposes consist API to crossplatform libraries"
 
   spec.description  = <<-DESC
