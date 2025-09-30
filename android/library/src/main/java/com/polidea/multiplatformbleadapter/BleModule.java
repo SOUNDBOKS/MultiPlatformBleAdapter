@@ -1329,7 +1329,7 @@ public class BleModule implements BleAdapter {
                         onConnectionStateChangedCallback.onEvent(ConnectionState.CONNECTING);
                     }
                 })
-                .doOnDispose(new Action() {
+                .doFinally(new Action() {
                     @Override
                     public void run() {
                         safeExecutor.error(BleErrorUtils.cancelled());
